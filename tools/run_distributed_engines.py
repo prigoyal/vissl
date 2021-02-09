@@ -29,7 +29,7 @@ def hydra_main(overrides: List[Any]):
         assert (
             is_submitit_available()
         ), "Please 'pip install submitit' to schedule jobs on SLURM"
-        launch_distributed_on_slurm(engine_name=args.engine_name, config=config)
+        launch_distributed_on_slurm(engine_name=args.engine_name, cfg=config)
     else:
         launch_distributed(
             cfg=config,

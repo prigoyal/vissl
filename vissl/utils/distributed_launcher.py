@@ -192,9 +192,9 @@ class _ResumableSlurmJob:
         self.config.DISTRIBUTED.INIT_METHOD = "tcp"
         self.config.DISTRIBUTED.RUN_ID = f"{master_ip}:{master_port}"
         launch_distributed(
+            cfg=self.config,
             node_id=node_id,
             engine_name=self.engine_name,
-            config=self.config,
             hook_generator=default_hook_generator,
         )
 

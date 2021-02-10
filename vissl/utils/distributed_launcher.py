@@ -215,13 +215,6 @@ def launch_distributed_on_slurm(cfg: AttrDict, engine_name: str):
         cfg (AttrDict): the configuration of the experiment
         engine_name (str): the name of the engine to run (train or extract_features)
     """
-    ######################################################################################
-    # DO NOT REMOVE: submitit processes will not be initialized correctly if numpy is not
-    # imported first
-    ######################################################################################
-    import numpy
-
-    print(numpy.__version__)
 
     import submitit
 

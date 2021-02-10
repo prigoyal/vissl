@@ -10,7 +10,6 @@ import sys
 from typing import List, Any
 
 from hydra.experimental import initialize_config_module, compose
-from vissl.hooks import default_hook_generator
 from vissl.utils.distributed_launcher import (
     launch_distributed,
     launch_distributed_on_slurm,
@@ -20,6 +19,13 @@ from vissl.utils.slurm import is_submitit_available
 
 
 def hydra_main(overrides: List[Any]):
+    ######################################################################################
+    # DO NOT MOVE THIS IMPORT TO TOP LEVEL: submitit processes will not be initialized
+    # correctly (MKL_THREADING_LAYER will be set to INTEL instead of GNU)
+    ######################################################################################
+    from vissl.hooks import default_hook_generator
+    ######################################################################################
+
     print(f"####### overrides: {overrides}")
     with initialize_config_module(config_module="vissl.config"):
         cfg = compose("defaults", overrides=overrides)
